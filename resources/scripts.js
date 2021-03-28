@@ -15,14 +15,24 @@ commands();
 function commands(){
     console.info("Welcome hooman. You can start a new game by typing \"game()\" in the console.")
 }
+//Ask user to start new game. If true, initialize points and rounds.
 function initialize(){
+    if (confirm("Do you want to start a new game?")===true){
+    console.log("Okay, we're starting a new game!")
+    alert("Okay, we're starting a new game!")
     playerPlay=0;
     computerScore=0;
     roundCounter=0;
+    game()
+    }
+    else {
+        alert("Roger that! If you want to play a new game later, write \"game()\" in the console.")
+    }
 } 
 function computerPlay() {
     return OPTIONS[Math.floor(Math.random()*OPTIONS.length)]
 }
+//Prompts user to input a valid string
 function playerValidate(playerPlay){
     playerPlay= prompt("Choose your weapon! You can choose between \"Rock\", \"Paper\", \"Scissors\"")
     while (!OPTIONS.includes(playerPlay.toLowerCase())){
@@ -30,41 +40,39 @@ function playerValidate(playerPlay){
     }
     playerValidated=playerPlay.toLowerCase();
     }
-//Add points to player or computer score.
-function scoreChecker() {
+//Criers show results to user
+function crierScoreChecker() {
     if (check.includes(TIE)) {
-        console.log(`Round ${roundCounter}: You both choosed ${TIE}`)
+        console.log(`Round ${roundCounter}: ${TIE}`)
+        alert(`Round ${roundCounter}: ${TIE}`)
     }
     else if (check.includes(WIN)){
-        console.log(`Round ${roundCounter}: Nice job with this round, ${check}`)
         playerScore++;
+        console.log(`Round ${roundCounter}: Nice job with this round, ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        alert(`Round ${roundCounter}: Nice job with this round, ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
     }
     else if (check.includes(LOOSE)) {
-        console.log(`Round ${roundCounter}: Unfortunately this time ${check}`)
         computerScore++;
+        console.log(`Round ${roundCounter}: Unfortunately this time ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        alert(`Round ${roundCounter}: Unfortunately this time ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`);
     }
     else {
         console.log("Something went wrong while checking scores.")
-        return        
+        return
     }
-}
-//Criers show results to user
-function crierScores(){
-    console.log(`Your score was: ${playerScore}, while computer was: ${computerScore}`)
 }
 
 function crierGameResults(){
     if (playerScore===5){
-        console.log(`Rejoice mortal! You won in ${roundCounter} rounds!`)
-        crierScores()
+        console.log(`Rejoice mortal! You won in ${roundCounter} rounds! \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        alert(`Rejoice mortal! You won in ${roundCounter} rounds! \nYour score: ${playerScore} | Computer score: ${computerScore}`)
     }
     else if (computerScore===5) {
-        console.log(`The computer won. Neverlucky. The game lasted ${roundCounter} rounds`)
-        crierScores()
+        console.log(`The computer won. Neverlucky. The game lasted ${roundCounter} rounds \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        alert(`The computer won. Neverlucky. The game lasted ${roundCounter} rounds \nYour score: ${playerScore} | Computer score: ${computerScore}`)
     }
     else {
         console.log("How did we achieve such a result?")
-        crierScores()
     }
 }
 //End of helper functions ------------------
@@ -107,7 +115,7 @@ function game(){
     while (playerScore<5 && computerScore<5){
     roundCounter++;
     singleRound(playerPlay,computerPlay);
-    scoreChecker(singleRound);
+    crierScoreChecker(singleRound);
     }
     crierGameResults();
     initialize();
