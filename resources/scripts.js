@@ -36,11 +36,11 @@ function scoreChecker() {
         console.log(`Round ${roundCounter}: You both choosed ${TIE}`)
     }
     else if (check.includes(WIN)){
-        console.log(`Round ${roundCounter}: Nice job with this round, ${WIN}`)
+        console.log(`Round ${roundCounter}: Nice job with this round, ${check}`)
         playerScore++;
     }
     else if (check.includes(LOOSE)) {
-        console.log(`Round ${roundCounter}: Unfortunately this time ${LOOSE}`)
+        console.log(`Round ${roundCounter}: Unfortunately this time ${check}`)
         computerScore++;
     }
     else {
