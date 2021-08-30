@@ -79,13 +79,12 @@ function crierGameResults(){
 
 //Plays a single round and return a string.
 function singleRound(playerPlay,computerPlay) {
-    playerValidate(playerPlay);
     let computerPlayLc=computerPlay();
-    if (playerValidated === computerPlayLc) {
+    if (playerPlay === computerPlayLc) {
         check=TIE
     }
     else {
-        switch (playerValidated+computerPlayLc) {
+        switch (playerPlay+computerPlayLc) {
             case ("rockpaper"):
                 check=`Paper wraps Rock! ${LOOSE}`;
                 break;
@@ -108,7 +107,10 @@ function singleRound(playerPlay,computerPlay) {
                 check="You broke it. Or the dev did. Whatever, go home script, you're drunk..";
         }
     }
-    
+    contentScore.textContent = check
+    divScore.appendChild(contentScore)
+    crierScoreChecker(singleRound);
+
 }
 //Game control
 function game(){
@@ -120,3 +122,15 @@ function game(){
     crierGameResults();
     initialize();
 }
+
+const choices = document.querySelectorAll("button.option")
+const divScore = document.querySelector("div.score-checker")
+const contentScore = document.createElement("p")
+
+
+
+choices.forEach(element => {
+    element.addEventListener("click", (e) => {
+        singleRound(e.target.id, computerPlay)
+    });
+});
