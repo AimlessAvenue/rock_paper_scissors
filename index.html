@@ -2,10 +2,17 @@
     <head>
         <title>Rock, Paper, Scissors!</title>
         <meta charset="UTF-8" content="width=device-width initial-scale=1"/>
-        <link rel="preload" as="script" href="resources/scripts.js">
+        <script src="resources/scripts.js" defer></script>
+        <link rel="stylesheet" href="resources/styles.css">
     </head>
-    <header><h1>Rock, Paper, Scissors!</h1></header>
     <body>
+        <header>
+            <h1>Rock, Paper, Scissors!</h1>
+            <div class="scoreboard">
+                <h2 id="player">Your score: </h2>
+                <h2 id="computer">Enemy score: </h2>
+            </div>
+        </header>
         <h3>Open the console to start playing!</h3> <h4>(F12 is the shortcut)</h4>
         <div class="option-list">
             <button class="option" id=rock>Rock</button>
@@ -16,7 +23,4 @@
             
         </div>
     </body>
-    <footer>
-        <script src="resources/scripts.js"></script>
-    </footer>
 </html>

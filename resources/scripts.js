@@ -43,21 +43,22 @@ function playerValidate(playerPlay){
 //Criers show results to user
 function crierScoreChecker() {
     if (check.includes(TIE)) {
+        contentScore.textContent = `Round ${roundCounter}: ${TIE}`
         console.log(`Round ${roundCounter}: ${TIE}`)
-        alert(`Round ${roundCounter}: ${TIE}`)
     }
     else if (check.includes(WIN)){
         playerScore++;
         console.log(`Round ${roundCounter}: Nice job with this round, ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
-        alert(`Round ${roundCounter}: Nice job with this round, ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        contentScore.textContent = (`Round ${roundCounter}: Nice job with this round, ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
     }
     else if (check.includes(LOOSE)) {
         computerScore++;
         console.log(`Round ${roundCounter}: Unfortunately this time ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`)
-        alert(`Round ${roundCounter}: Unfortunately this time ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`);
+        contentScore.textContent = (`Round ${roundCounter}: Unfortunately this time ${check} \nYour score: ${playerScore} | Computer score: ${computerScore}`);
     }
     else {
         console.log("Something went wrong while checking scores.")
+        ontentScore.textContent = "Something went wrong while checking scores."
         return
     }
 }
@@ -65,11 +66,11 @@ function crierScoreChecker() {
 function crierGameResults(){
     if (playerScore===5){
         console.log(`Rejoice mortal! You won in ${roundCounter} rounds! \nYour score: ${playerScore} | Computer score: ${computerScore}`)
-        alert(`Rejoice mortal! You won in ${roundCounter} rounds! \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        contentScore.textContent = `Rejoice mortal! You won in ${roundCounter} rounds! \nYour score: ${playerScore} | Computer score: ${computerScore}`
     }
     else if (computerScore===5) {
         console.log(`The computer won. Neverlucky. The game lasted ${roundCounter} rounds \nYour score: ${playerScore} | Computer score: ${computerScore}`)
-        alert(`The computer won. Neverlucky. The game lasted ${roundCounter} rounds \nYour score: ${playerScore} | Computer score: ${computerScore}`)
+        contentScore.textContent = `The computer won. Neverlucky. The game lasted ${roundCounter} rounds \nYour score: ${playerScore} | Computer score: ${computerScore}`
     }
     else {
         console.log("How did we achieve such a result?")
@@ -107,20 +108,18 @@ function singleRound(playerPlay,computerPlay) {
                 check="You broke it. Or the dev did. Whatever, go home script, you're drunk..";
         }
     }
-    contentScore.textContent = check
-    divScore.appendChild(contentScore)
-    crierScoreChecker(singleRound);
-
+    gameControl()
 }
 //Game control
-function game(){
-    while (playerScore<5 && computerScore<5){
+function gameControl(){
+    if (playerScore!==5 && computerScore!==5) {
     roundCounter++;
-    singleRound(playerPlay,computerPlay);
-    crierScoreChecker(singleRound);
+    crierScoreChecker();
+    divScore.appendChild(contentScore)
     }
-    crierGameResults();
-    initialize();
+    else {
+        crierGameResults();
+    }
 }
 
 const choices = document.querySelectorAll("button.option")
